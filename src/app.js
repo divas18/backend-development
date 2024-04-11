@@ -7,7 +7,7 @@ const app = express();
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
-    Credential,
+    credentials: true,
   })
 );
 
@@ -22,5 +22,13 @@ app.use(express.static("public"));
 
 // Allow us to perform curd operation on cookies which includes update, add, remove or read.
 app.use(cookieParser());
+
+
+// routes import
+import userRouter from "./routes/user.routes.js"
+
+// routes declaration
+app.use("/api/v1/users", userRouter);
+// Url will become like - /api/v1/users/[register]  [x] will be decided by userRouter
 
 export { app };
