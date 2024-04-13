@@ -51,8 +51,8 @@ const userSchema = new mongoose.Schema(
 
 // middleware function in a Mongoose schema, specifically a pre-save hook. It is used to hash the password before saving it to the database.
 userSchema.pre("save", async function (next) {
-  // checks whether the password field (this.password) has been modified. If the password has not been modified, it means it is either an update operation where the password is not being changed or it's a new document being created without any modifications to the password field. 
-  if (!this.isModified(this.password)) {
+  // checks whether the "password" field (this.password) has been modified. The isModified() method of the Mongoose schema is used for this purpose. It takes the name of the field as an argument and returns true if the field has been modified since it was last saved, and false otherwise.
+  if(!this.isModified("password")) {
     return next();
   }
 
