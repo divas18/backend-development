@@ -2,7 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import {ApiResponse} from "../utils/ApiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 const registerUser = asyncHandler(async (request, response, next) => {
   //   response.status(200).json({
@@ -27,7 +27,7 @@ const registerUser = asyncHandler(async (request, response, next) => {
   ) {
     throw new ApiError(400, "All feild is required");
   }
-
+  // Checking for existed user
   const existedUser = User.findOne({
     $or: [{ username }, { email }],
   });
@@ -64,14 +64,13 @@ const registerUser = asyncHandler(async (request, response, next) => {
     "-password -refreshToken"
   );
 
-  if(!createdUser) {
+  if (!createdUser) {
     throw new ApiError(500, "Something went wrong while registering the user");
   }
 
-  return response.send(201).json(
-    new ApiResponse(200, createdUser, "user register successfully")
-  )
-  console.log(request.body);
+  return response
+    .send(201)
+    .json(new ApiResponse(200, createdUser, "user register successfully"));
 });
 
 export { registerUser };

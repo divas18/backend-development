@@ -49,6 +49,7 @@ const userSchema = new mongoose.Schema(
   { timeStamps: true }
 );
 
+// middleware function in a Mongoose schema, specifically a pre-save hook. It is used to hash the password before saving it to the database.
 userSchema.pre("save", async function (next) {
   // if password is not modified then simply return to execute next method;
   if (!this.isModified(this.password)) {

@@ -4,6 +4,8 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
+// app.use() is used to add middleware functions to the application's request processing pipeline.
+
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
@@ -23,9 +25,8 @@ app.use(express.static("public"));
 // Allow us to perform curd operation on cookies which includes update, add, remove or read.
 app.use(cookieParser());
 
-
 // routes import
-import userRouter from "./routes/user.routes.js"
+import userRouter from "./routes/user.routes.js";
 
 // routes declaration
 app.use("/api/v1/users", userRouter);
