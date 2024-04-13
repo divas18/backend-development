@@ -56,7 +56,7 @@ const registerUser = asyncHandler(async (request, response, next) => {
     coverImage: coverImage?.url || "",
     email,
     password,
-    username: username.toLowercase(),
+    username: String(username).toLowerCase(),
   });
 
   //  remove password and refresh token field from response
