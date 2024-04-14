@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 // middleware function in a Mongoose schema, specifically a pre-save hook. It is used to hash the password before saving it to the database.
