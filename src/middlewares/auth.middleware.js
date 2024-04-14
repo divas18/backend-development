@@ -6,7 +6,7 @@ import { User } from "../models/user.model.js";
 export const verifyJWT = asyncHandler(async (request, _, next) => {
   try {
     const token =
-      request.cookie?.accessToken ||
+      request.cookies?.accessToken ||
       request.header("Authorization")?.replace("Bearer ", "");
 
     if (!token) {
@@ -26,7 +26,7 @@ export const verifyJWT = asyncHandler(async (request, _, next) => {
       throw new ApiError(401, "Invalid access token");
     }
 
-    req.user = user;
+    request.user = user;
     next();
   } catch (error) {
     throw new ApiError(401, error?.message || "Invalid access token");

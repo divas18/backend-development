@@ -113,7 +113,7 @@ const loginUser = asyncHandler(async (request, response, next) => {
 
   const { email, username, password } = request.body;
 
-  if (!username || !email) {
+  if (!username && !email) {
     throw new ApiError(400, "username or password is required");
   }
 
